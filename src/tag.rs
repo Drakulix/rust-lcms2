@@ -177,8 +177,8 @@ impl<'a> Tag<'a> {
             UcrBgTag => Tag::UcrBg(cast(data)),
             VcgtTag => Tag::VcgtCurves([
                 ToneCurveRef::from_ptr(aligned_mut(data)),
-                ToneCurveRef::from_ptr(*aligned_mut::<*mut ffi::ToneCurve>(data).offset(1)),
-                ToneCurveRef::from_ptr(*aligned_mut::<*mut ffi::ToneCurve>(data).offset(2)),
+                ToneCurveRef::from_ptr(*(aligned_mut::<*mut ffi::ToneCurve>(data).offset(1))),
+                ToneCurveRef::from_ptr(*(aligned_mut::<*mut ffi::ToneCurve>(data).offset(2))),
             ]),
             ViewingConditionsTag => Tag::ICCViewingConditions(cast(data)),
             _ => Tag::None,
