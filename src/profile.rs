@@ -468,7 +468,7 @@ impl<Ctx: Context> Profile<Ctx> {
     /// This is a devicelink operating in the target colorspace with as many transfer functions as components.
     /// Number of tone curves must be sufficient for the color space.
     #[inline]
-    pub unsafe fn new_linearization_device_link_context(context: impl AsRef<Ctx>, color_space: ColorSpaceSignature, curves: &[ToneCurveRef]) -> LCMSResult<Self> {
+    pub unsafe fn new_linearization_device_link_context(context: impl AsRef<Ctx>, color_space: ColorSpaceSignature, curves: &[&ToneCurveRef]) -> LCMSResult<Self> {
         let v: Vec<_> = curves.iter().map(|c| c.as_ptr() as *const _).collect();
         Self::new_handle(ffi::cmsCreateLinearizationDeviceLinkTHR(context.as_ref().as_ptr(), color_space, v.as_ptr()))
     }
